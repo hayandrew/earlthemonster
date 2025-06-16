@@ -215,52 +215,65 @@ export default function ContactForm({ formConfig }: ContactFormProps) {
         </div>
       )}
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label htmlFor="name" className="block text-sm font-bold text-white mb-1">
-            {formConfig?.fields?.name?.label || 'Name'}
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400"
-            placeholder={formConfig?.fields?.name?.placeholder || 'Your name'}
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-bold text-white mb-1">
-            {formConfig?.fields?.email?.label || 'Email'}
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400"
-            placeholder={formConfig?.fields?.email?.placeholder || 'your.email@example.com'}
-          />
-        </div>
-        <div>
-          <label htmlFor="message" className="block text-sm font-bold text-white mb-1">
-            {formConfig?.fields?.message?.label || 'Message'}
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows={4}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400"
-            placeholder={formConfig?.fields?.message?.placeholder || 'Your message'}
-          />
-        </div>
-        <div ref={recaptchaContainerRef} className="mb-4"></div>
+        {!success && (
+          <>
+            <div>
+              <label htmlFor="name" className="block text-sm font-bold text-white mb-1">
+                {formConfig?.fields?.name?.label || 'Name'}
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                disabled={loading}
+                className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400 ${
+                  loading ? 'opacity-60 cursor-not-allowed' : ''
+                }`}
+                placeholder={formConfig?.fields?.name?.placeholder || 'Your name'}
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-bold text-white mb-1">
+                {formConfig?.fields?.email?.label || 'Email'}
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                disabled={loading}
+                className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400 ${
+                  loading ? 'opacity-60 cursor-not-allowed' : ''
+                }`}
+                placeholder={formConfig?.fields?.email?.placeholder || 'your.email@example.com'}
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-sm font-bold text-white mb-1">
+                {formConfig?.fields?.message?.label || 'Message'}
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                disabled={loading}
+                rows={4}
+                className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400 ${
+                  loading ? 'opacity-60 cursor-not-allowed' : ''
+                }`}
+                placeholder={formConfig?.fields?.message?.placeholder || 'Your message'}
+              />
+            </div>
+            <div ref={recaptchaContainerRef} className="mb-4"></div>
+          </>
+        )}
         <button
           type="submit"
           disabled={loading || success}
