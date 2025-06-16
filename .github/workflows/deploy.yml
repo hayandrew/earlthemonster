@@ -15,8 +15,6 @@ jobs:
   build:
     if: ${{ !inputs.deploy_only }}
     runs-on: ubuntu-latest
-    outputs:
-      build_dir: ${{ steps.build.outputs.build_dir }}
     
     steps:
     - uses: actions/checkout@v4
@@ -36,8 +34,6 @@ jobs:
         npm run build
         mkdir -p out/public_html/earlthemonster.com/config
         cp config/recaptcha.php out/public_html/earlthemonster.com/config/
-      env:
-        build_dir: ${{ github.workspace }}/out
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -62,20 +58,31 @@ jobs:
     - name: Checkout repository
       if: ${{ inputs.deploy_only }}
       uses: actions/checkout@v4
-    
+
+    - name: Install LFTP
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y lftp
+
     - name: Deploy to GoDaddy
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        port: ${{ secrets.FTP_PORT }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./out/
-        server-dir: public_html/earlthemonster.com/
-        dangerous-clean-slate: true
-        timeout: 300000
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/.DS_Store 
+      run: |
+        echo "Starting FTP deployment..."
+        echo "Connecting to ${{ secrets.FTP_SERVER }}:${{ secrets.FTP_PORT }}"
+        
+        # Create LFTP commands
+        cat > lftp_commands.txt << EOF
+        set ssl:verify-certificate no
+        set net:timeout 60
+        set net:max-retries 3
+        set net:reconnect-interval-base 5
+        set net:reconnect-interval-multiplier 1
+        set net:reconnect-interval-limit 2
+        open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -p ${{ secrets.FTP_PORT }} ${{ secrets.FTP_SERVER }}
+        mirror --verbose --reverse --delete --parallel=4 --exclude-glob .git* --exclude-glob node_modules --exclude-glob .DS_Store ./out/ public_html/earlthemonster.com/
+        bye
+        EOF
+        
+        # Execute LFTP commands
+        lftp -f lftp_commands.txt
+        
+        echo "FTP deployment completed" 
