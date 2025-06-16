@@ -96,6 +96,7 @@ require 'vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 $mail = new PHPMailer(true);
 
@@ -104,13 +105,24 @@ try {
     
     // Server settings
     $mail->isSMTP();
-    $mail->Host = 'smtpout.secureserver.net';  // Your SMTP server
-    $mail->SMTPAuth = true;
-    $mail->Username = 'info@earlthemonster.com'; // SMTP username
-    $mail->Password = 'Bill0612love!'; // SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
-
+    $mail->Host = 'localhost';
+    $mail->SMTPAuth = false;  // No authentication required
+    $mail->SMTPSecure = '';   // No SSL/TLS
+    $mail->Port = 25;         // Standard SMTP port
+    
+    // Remove SSL options since we're not using encryption
+    $mail->SMTPOptions = array();
+    
+    // Set timeout values
+    $mail->Timeout = 60;
+    $mail->SMTPKeepAlive = true;
+    
+    // Debug settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    $mail->Debugoutput = function($str, $level) {
+        error_log("SMTP Debug: $str");
+    };
+    
     // Recipients
     $mail->setFrom('info@earlthemonster.com', 'Earl the Monster Contact Form');
     $mail->addAddress('info@earlthemonster.com');
@@ -135,6 +147,8 @@ try {
     echo json_encode(['success' => true, 'message' => 'Thank you for your message! We will get back to you soon.']);
 } catch (Exception $e) {
     error_log("Failed to send email via SMTP. Error: " . $mail->ErrorInfo);
+    error_log("Exception details: " . $e->getMessage());
+    error_log("Stack trace: " . $e->getTraceAsString());
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Failed to send message. Please try again later.']);
 } 
