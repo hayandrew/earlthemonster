@@ -35,7 +35,6 @@ jobs:
         mkdir -p out/public_html/earlthemonster.com/config
         cp config/recaptcha.php out/public_html/earlthemonster.com/config/
         cp .htaccess out/public_html/earlthemonster.com/
-        cp .htaccess out/
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
