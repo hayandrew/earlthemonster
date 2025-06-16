@@ -125,7 +125,7 @@ try {
     
     // Recipients
     $mail->setFrom('info@earlthemonster.com', 'Earl the Monster Contact Form');
-    $mail->addAddress('info@earlthemonster.com');
+    $mail->addAddress('andy@andyhay.com');  // Only sending to the working email
     $mail->addReplyTo($email, $name);
 
     // Content
@@ -137,10 +137,15 @@ try {
         <p><strong>Email:</strong> {$email}</p>
         <p><strong>Message:</strong></p>
         <p>" . nl2br(htmlspecialchars($message)) . "</p>
+        <p><small>This email was sent from the contact form on earlthemonster.com</small></p>
     ";
-    $mail->AltBody = "Name: {$name}\nEmail: {$email}\n\nMessage:\n{$message}";
+    $mail->AltBody = "Name: {$name}\nEmail: {$email}\n\nMessage:\n{$message}\n\nThis email was sent from the contact form on earlthemonster.com";
 
     error_log("Attempting to send email via SMTP...");
+    error_log("From: info@earlthemonster.com");
+    error_log("To: andy@andyhay.com");
+    error_log("Reply-To: {$email}");
+    
     $mail->send();
     error_log("Email sent successfully via SMTP");
     
