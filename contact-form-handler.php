@@ -107,7 +107,7 @@ try {
     $mail->Host = 'smtpout.secureserver.net';  // Your SMTP server
     $mail->SMTPAuth = true;
     $mail->Username = 'info@earlthemonster.com'; // SMTP username
-    $mail->Password = 'Washington0612!'; // SMTP password
+    $mail->Password = 'Bill0612love!'; // SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
