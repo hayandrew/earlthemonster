@@ -20,7 +20,7 @@ error_log("Referer: " . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERE
 error_log("POST Data: " . print_r($_POST, true));
 
 // Load reCAPTCHA configuration
-$configPath = __DIR__ . '/../config/recaptcha.php';
+$configPath = __DIR__ . '/config/recaptcha.php';
 error_log("Looking for config file at: " . $configPath);
 error_log("Config file exists: " . (file_exists($configPath) ? 'Yes' : 'No'));
 
