@@ -93,37 +93,32 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-apt-
 
-    - name: Install LFTP
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y lftp
-
     - name: Deploy to GoDaddy
       run: |
         echo "Starting FTP deployment..."
         echo "Connecting to ${{ secrets.FTP_SERVER }}:${{ secrets.FTP_PORT }}"
         
-        # Create LFTP commands
-        cat > lftp_commands.txt << EOF
-        set ssl:verify-certificate no
-        set net:timeout 120
-        set net:max-retries 5
-        set net:reconnect-interval-base 10
-        set net:reconnect-interval-multiplier 2
-        set net:reconnect-interval-max 30
-        set net:connection-limit 1
-        open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -p ${{ secrets.FTP_PORT }} ${{ secrets.FTP_SERVER }}
+        # Create FTP commands
+        cat > ftp_commands.txt << EOF
+        open ${{ secrets.FTP_SERVER }} ${{ secrets.FTP_PORT }}
+        user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+        binary
+        prompt
+        cd public_html/earlthemonster.com
         
-        # Upload files with retry logic
-        mirror --verbose --reverse --delete --parallel=2 --exclude-glob .git* --exclude-glob node_modules --exclude-glob .DS_Store --include-glob .htaccess ./out/ public_html/earlthemonster.com/
+        # Upload all files
+        mput -r out/*
         
-        # List files after upload (including hidden files)
-        ls -la public_html/earlthemonster.com/
+        # Upload .htaccess separately
+        put out/.htaccess .htaccess
+        
+        # List files
+        ls -la
         
         bye
         EOF
         
-        # Execute LFTP commands
-        lftp -f lftp_commands.txt
+        # Execute FTP commands with increased timeout
+        ftp -n -v -i < ftp_commands.txt
         
         echo "FTP deployment completed" 
