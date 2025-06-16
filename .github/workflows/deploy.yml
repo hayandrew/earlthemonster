@@ -96,14 +96,25 @@ jobs:
         user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
         binary
         prompt
-        passive
+        passive on
         cd public_html/earlthemonster.com
         
-        # Upload all files
-        mput -r out/*
+        # Upload files individually
+        lcd out
+        mput *.html
+        mput *.txt
+        mput *.php
+        mput *.ico
+        mput *.svg
+        
+        # Upload directories recursively
+        mirror _next _next
+        mirror images images
+        mirror config config
+        mirror vendor vendor
         
         # Upload .htaccess separately
-        put out/.htaccess .htaccess
+        put .htaccess .htaccess
         
         # List files
         ls -la
