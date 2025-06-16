@@ -92,20 +92,49 @@ if (!$recaptcha_result['success']) {
 }
 
 // Process the form submission
-$to = "info@earlthemonster.com";
-$subject = "New Contact Form Submission from " . $name;
-$headers = "From: " . $email . "\r\n";
-$headers .= "Reply-To: " . $email . "\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion();
+require 'vendor/autoload.php';
 
-$email_message = "Name: " . $name . "\n";
-$email_message .= "Email: " . $email . "\n\n";
-$email_message .= "Message:\n" . $message;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-if (mail($to, $subject, $email_message, $headers)) {
+$mail = new PHPMailer(true);
+
+try {
+    error_log("Setting up PHPMailer...");
+    
+    // Server settings
+    $mail->isSMTP();
+    $mail->Host = 'smtpout.secureserver.net';  // Your SMTP server
+    $mail->SMTPAuth = true;
+    $mail->Username = 'info@earlthemonster.com'; // SMTP username
+    $mail->Password = 'Washington0612!'; // SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
+
+    // Recipients
+    $mail->setFrom('info@earlthemonster.com', 'Earl the Monster Contact Form');
+    $mail->addAddress('info@earlthemonster.com');
+    $mail->addReplyTo($email, $name);
+
+    // Content
+    $mail->isHTML(true);
+    $mail->Subject = "New Contact Form Submission from " . $name;
+    $mail->Body = "
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> {$name}</p>
+        <p><strong>Email:</strong> {$email}</p>
+        <p><strong>Message:</strong></p>
+        <p>" . nl2br(htmlspecialchars($message)) . "</p>
+    ";
+    $mail->AltBody = "Name: {$name}\nEmail: {$email}\n\nMessage:\n{$message}";
+
+    error_log("Attempting to send email via SMTP...");
+    $mail->send();
+    error_log("Email sent successfully via SMTP");
+    
     echo json_encode(['success' => true, 'message' => 'Thank you for your message! We will get back to you soon.']);
-} else {
-    error_log("Failed to send email");
+} catch (Exception $e) {
+    error_log("Failed to send email via SMTP. Error: " . $mail->ErrorInfo);
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Failed to send message. Please try again later.']);
 } 

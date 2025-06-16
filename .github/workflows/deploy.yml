@@ -28,6 +28,14 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
+    - name: Install Composer
+      run: |
+        curl -sS https://getcomposer.org/installer | php
+        sudo mv composer.phar /usr/local/bin/composer
+    
+    - name: Install PHP dependencies
+      run: composer install --no-dev --optimize-autoloader
+    
     - name: Build
       id: build
       run: |
@@ -46,6 +54,9 @@ jobs:
         
         echo "Copying contact form handler..."
         cp -v contact-form-handler.php out/
+        
+        echo "Copying vendor directory..."
+        cp -rv vendor out/
         
         echo "Listing output directory contents:"
         ls -la out/
@@ -101,7 +112,16 @@ jobs:
         set net:reconnect-interval-multiplier 1
         set net:reconnect-interval-max 2
         open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -p ${{ secrets.FTP_PORT }} ${{ secrets.FTP_SERVER }}
+        
+        # Clean remote directory first
+        rm -r public_html/earlthemonster.com/*
+        
+        # Upload files
         mirror --verbose --reverse --delete --parallel=4 --exclude-glob .git* --exclude-glob node_modules --exclude-glob .DS_Store ./out/ public_html/earlthemonster.com/
+        
+        # List files after upload
+        ls -la public_html/earlthemonster.com/
+        
         bye
         EOF
         
