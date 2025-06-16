@@ -13,8 +13,8 @@ ini_set('error_log', __DIR__ . '/php_errors.log');
 // Log the start of the request
 error_log("=== New Form Submission at " . date('Y-m-d H:i:s') . " ===");
 error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
-error_log("Remote Address: " . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown'));
-error_log("Referer: " . ($_SERVER['HTTP_REFERER'] ?? 'No referer'));
+error_log("Remote Address: " . (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'Unknown'));
+error_log("Referer: " . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'No referer'));
 
 // Log all POST data
 error_log("POST Data: " . print_r($_POST, true));
@@ -35,10 +35,10 @@ $recaptchaConfig = require $configPath;
 error_log("Loaded reCAPTCHA config: " . print_r($recaptchaConfig, true));
 
 // Get form data
-$name = $_POST['name'] ?? '';
-$email = $_POST['email'] ?? '';
-$message = $_POST['message'] ?? '';
-$recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+$name = isset($_POST['name']) ? $_POST['name'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$message = isset($_POST['message']) ? $_POST['message'] : '';
+$recaptchaResponse = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
 
 // Log form data (excluding sensitive information)
 error_log("Form Data Received:");
@@ -48,7 +48,7 @@ error_log("Message Length: " . strlen($message) . " characters");
 error_log("reCAPTCHA Response Length: " . strlen($recaptchaResponse) . " characters");
 
 // Determine environment
-$referer = $_SERVER['HTTP_REFERER'] ?? '';
+$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
 $isDevelopment = strpos($referer, 'localhost:3000') !== false || strpos($referer, 'localhost:8000') !== false;
 error_log("Environment Detection:");
 error_log("Referer: " . $referer);
@@ -56,7 +56,7 @@ error_log("Is Development: " . ($isDevelopment ? 'Yes' : 'No'));
 
 // Use appropriate keys based on environment
 $environment = $isDevelopment ? 'development' : 'production';
-$recaptchaSecret = $recaptchaConfig[$environment]['secret_key'] ?? null;
+$recaptchaSecret = isset($recaptchaConfig[$environment]['secret_key']) ? $recaptchaConfig[$environment]['secret_key'] : null;
 
 if (!$recaptchaSecret) {
     error_log("Error: reCAPTCHA secret key not found for environment: " . $environment);
@@ -82,7 +82,8 @@ try {
     error_log("reCAPTCHA Verification Result: " . print_r($recaptchaData, true));
     
     if (!$recaptchaData->success) {
-        error_log("reCAPTCHA Verification Failed: " . implode(', ', $recaptchaData->{'error-codes'} ?? []));
+        $errorCodes = isset($recaptchaData->{'error-codes'}) ? $recaptchaData->{'error-codes'} : [];
+        error_log("reCAPTCHA Verification Failed: " . implode(', ', $errorCodes));
         http_response_code(400);
         echo json_encode([
             'error' => 'reCAPTCHA verification failed',
