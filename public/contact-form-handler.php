@@ -10,8 +10,20 @@ ini_set('display_errors', 0); // Disable display errors in production
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/php_errors.log');
 
+// Log the start of the request
+error_log("=== New Form Submission at " . date('Y-m-d H:i:s') . " ===");
+error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
+error_log("Remote Address: " . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown'));
+error_log("Referer: " . ($_SERVER['HTTP_REFERER'] ?? 'No referer'));
+
+// Log all POST data
+error_log("POST Data: " . print_r($_POST, true));
+
 // Load reCAPTCHA configuration
 $configPath = __DIR__ . '/../config/recaptcha.php';
+error_log("Looking for config file at: " . $configPath);
+error_log("Config file exists: " . (file_exists($configPath) ? 'Yes' : 'No'));
+
 if (!file_exists($configPath)) {
     error_log("Error: reCAPTCHA config file not found at: " . $configPath);
     http_response_code(500);
@@ -20,13 +32,7 @@ if (!file_exists($configPath)) {
 }
 
 $recaptchaConfig = require $configPath;
-
-// Log request details
-error_log("=== New Form Submission ===");
-error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
-error_log("Request Time: " . date('Y-m-d H:i:s'));
-error_log("Remote Address: " . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown'));
-error_log("Referer: " . ($_SERVER['HTTP_REFERER'] ?? 'No referer'));
+error_log("Loaded reCAPTCHA config: " . print_r($recaptchaConfig, true));
 
 // Get form data
 $name = $_POST['name'] ?? '';
@@ -121,6 +127,10 @@ $headers .= "X-Mailer: PHP/" . phpversion();
 $emailBody = "Name: {$name}\n";
 $emailBody .= "Email: {$email}\n\n";
 $emailBody .= "Message:\n{$message}";
+
+// Log email attempt
+error_log("Attempting to send email to: " . $to);
+error_log("Email headers: " . $headers);
 
 // Send email
 try {
