@@ -85,7 +85,7 @@ jobs:
         set net:max-retries 3
         set net:reconnect-interval-base 5
         set net:reconnect-interval-multiplier 1
-        set net:reconnect-interval-limit 2
+        set net:reconnect-interval-max 2
         open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -p ${{ secrets.FTP_PORT }} ${{ secrets.FTP_SERVER }}
         mirror --verbose --reverse --delete --parallel=4 --exclude-glob .git* --exclude-glob node_modules --exclude-glob .DS_Store ./out/ public_html/earlthemonster.com/
         bye
