@@ -106,18 +106,19 @@ jobs:
         # Create LFTP commands
         cat > lftp_commands.txt << EOF
         set ssl:verify-certificate no
-        set net:timeout 60
-        set net:max-retries 3
-        set net:reconnect-interval-base 5
-        set net:reconnect-interval-multiplier 1
-        set net:reconnect-interval-max 2
+        set net:timeout 120
+        set net:max-retries 5
+        set net:reconnect-interval-base 10
+        set net:reconnect-interval-multiplier 2
+        set net:reconnect-interval-max 30
+        set net:connection-limit 1
         open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -p ${{ secrets.FTP_PORT }} ${{ secrets.FTP_SERVER }}
         
         # Clean remote directory first
         rm -r public_html/earlthemonster.com/*
         
-        # Upload files
-        mirror --verbose --reverse --delete --parallel=4 --exclude-glob .git* --exclude-glob node_modules --exclude-glob .DS_Store ./out/ public_html/earlthemonster.com/
+        # Upload files with retry logic
+        mirror --verbose --reverse --delete --parallel=2 --exclude-glob .git* --exclude-glob node_modules --exclude-glob .DS_Store ./out/ public_html/earlthemonster.com/
         
         # List files after upload
         ls -la public_html/earlthemonster.com/
