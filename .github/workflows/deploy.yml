@@ -1,12 +1,22 @@
-name: Deploy to GoDaddy
+name: Build and Deploy to GoDaddy
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      deploy_only:
+        description: 'Deploy only (skip build)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
-  build-and-deploy:
+  build:
+    if: ${{ !inputs.deploy_only }}
     runs-on: ubuntu-latest
+    outputs:
+      build_dir: ${{ steps.build.outputs.build_dir }}
     
     steps:
     - uses: actions/checkout@v3
@@ -21,12 +31,29 @@ jobs:
       run: npm ci
     
     - name: Build
-      run: npm run build
-    
-    - name: Copy config directory
+      id: build
       run: |
+        npm run build
         mkdir -p out/public_html/earlthemonster.com/config
         cp config/recaptcha.php out/public_html/earlthemonster.com/config/
+      env:
+        build_dir: ${{ github.workspace }}/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download build artifacts
+      if: ${{ !inputs.deploy_only }}
+      uses: actions/download-artifact@v3
+      with:
+        name: build-artifacts
+        path: out
+    
+    - name: Checkout repository
+      if: ${{ inputs.deploy_only }}
+      uses: actions/checkout@v3
     
     - name: Deploy to GoDaddy
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
