@@ -108,13 +108,29 @@ jobs:
         mput *.svg
         
         # Upload directories recursively
-        mirror _next _next
-        mirror images images
-        mirror config config
-        mirror vendor vendor
+        cd _next
+        lcd _next
+        mput *
+        cd ..
+        
+        cd images
+        lcd images
+        mput *
+        cd ..
+        
+        cd config
+        lcd config
+        mput *
+        cd ..
+        
+        cd vendor
+        lcd vendor
+        mput *
+        cd ..
         
         # Upload .htaccess separately
-        put .htaccess .htaccess
+        lcd ..
+        put out/.htaccess .htaccess
         
         # List files
         ls -la
