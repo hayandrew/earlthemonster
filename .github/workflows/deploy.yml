@@ -114,9 +114,6 @@ jobs:
         set net:connection-limit 1
         open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -p ${{ secrets.FTP_PORT }} ${{ secrets.FTP_SERVER }}
         
-        # Clean remote directory first
-        rm -r public_html/earlthemonster.com/*
-        
         # Upload files with retry logic
         mirror --verbose --reverse --delete --parallel=2 --exclude-glob .git* --exclude-glob node_modules --exclude-glob .DS_Store ./out/ public_html/earlthemonster.com/
         
