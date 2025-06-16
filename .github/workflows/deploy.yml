@@ -85,14 +85,6 @@ jobs:
       if: ${{ inputs.deploy_only }}
       uses: actions/checkout@v4
 
-    - name: Cache apt packages
-      uses: actions/cache@v4
-      with:
-        path: /var/cache/apt/archives
-        key: ${{ runner.os }}-apt-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-apt-
-
     - name: Deploy to GoDaddy
       run: |
         echo "Starting FTP deployment..."
@@ -104,6 +96,7 @@ jobs:
         user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
         binary
         prompt
+        passive
         cd public_html/earlthemonster.com
         
         # Upload all files
@@ -118,7 +111,30 @@ jobs:
         bye
         EOF
         
-        # Execute FTP commands with increased timeout
-        ftp -n -v -i < ftp_commands.txt
+        # Try FTP connection with retries
+        max_retries=5
+        retry_count=0
+        success=false
         
-        echo "FTP deployment completed" 
+        while [ $retry_count -lt $max_retries ] && [ "$success" = false ]; do
+          echo "Attempt $((retry_count + 1)) of $max_retries..."
+          
+          # Try FTP connection with timeout
+          timeout 10 ftp -n -v -i -p < ftp_commands.txt
+          
+          if [ $? -eq 0 ]; then
+            success=true
+            echo "FTP deployment completed successfully"
+          else
+            retry_count=$((retry_count + 1))
+            if [ $retry_count -lt $max_retries ]; then
+              echo "Connection failed, waiting before retry..."
+              sleep 5
+            fi
+          fi
+        done
+        
+        if [ "$success" = false ]; then
+          echo "FTP deployment failed after $max_retries attempts"
+          exit 1
+        fi 
