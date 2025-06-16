@@ -19,10 +19,10 @@ jobs:
       build_dir: ${{ steps.build.outputs.build_dir }}
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
         cache: 'npm'
@@ -46,14 +46,14 @@ jobs:
     steps:
     - name: Download build artifacts
       if: ${{ !inputs.deploy_only }}
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: build-artifacts
         path: out
     
     - name: Checkout repository
       if: ${{ inputs.deploy_only }}
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     
     - name: Deploy to GoDaddy
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
