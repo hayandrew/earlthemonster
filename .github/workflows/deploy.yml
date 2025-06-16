@@ -31,11 +31,24 @@ jobs:
     - name: Build
       id: build
       run: |
+        echo "Starting build process..."
         npm run build
+        echo "Build completed, setting up files..."
+        
+        echo "Creating config directory..."
         mkdir -p out/config
-        cp config/recaptcha.php out/config/
-        cp .htaccess out/
-        cp contact-form-handler.php out/
+        
+        echo "Copying config files..."
+        cp -v config/recaptcha.php out/config/
+        
+        echo "Copying .htaccess..."
+        cp -v .htaccess out/
+        
+        echo "Copying contact form handler..."
+        cp -v contact-form-handler.php out/
+        
+        echo "Listing output directory contents:"
+        ls -la out/
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
