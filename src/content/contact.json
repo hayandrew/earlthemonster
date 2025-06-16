@@ -1,0 +1,51 @@
+{
+  "title": "Get in Touch",
+  "description": "Have questions about Earl's magical socks or want to learn more about the book? We'd love to hear from you! Whether you're a sock enthusiast, a monster fan, or just curious about the story, feel free to reach out.",
+  "contactInfo": {
+    "email": "info@earlthemonster.com",
+    "phone": "+1 (917) 652-6748",
+    "address": [
+      "Earl the Monster",
+      "108 W 39th St",
+      "Ste 1006 #1013",
+      "New York, NY 10018"
+    ]
+  },
+  "socialMedia": {
+    "title": "Follow Us",
+    "platforms": [
+      {
+        "name": "Facebook",
+        "url": "https://facebook.com/earlthemonster"
+      },
+      {
+        "name": "Instagram",
+        "url": "https://instagram.com/earlthemonster"
+      },
+      {
+        "name": "Twitter",
+        "url": "https://twitter.com/earlthemonster"
+      }
+    ]
+  },
+  "form": {
+    "title": "Send us a Message",
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "you@example.com"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Type your message here..."
+      }
+    },
+    "submitButton": {
+      "text": "Send Message"
+    }
+  }
+} 

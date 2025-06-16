@@ -1,0 +1,52 @@
+{
+  "bookSection": {
+    "title": "About the Book",
+    "description": "With playful rhymes and hand-drawn illustrations, this bedtime story is for anyone who loves socks or likes spending time with a big yellow monster. Creator Andy Hay imagines a whimsical world filled with magic, color, and delight.",
+    "gallery": {
+      "title": "Book Preview",
+      "images": [
+        {
+          "src": "/images/book/cover.png",
+          "alt": "Book Cover"
+        },
+        {
+          "src": "/images/book/preview-1.png",
+          "alt": "Earl in the forest"
+        },
+        {
+          "src": "/images/book/preview-2.png",
+          "alt": "Sock trees"
+        },
+        {
+          "src": "/images/book/preview-3.png",
+          "alt": "Sardine tins"
+        }
+      ]
+    }
+  },
+  "behindTheScenes": {
+    "title": "Behind the Scenes",
+    "description": "From the magical sock trees to the basement full of sardine tins, every detail in Earl's world was carefully crafted to create a delightful reading experience. The story combines whimsical elements with practical sock care tips, making it both entertaining and educational.",
+    "gallery": {
+      "title": "Creation Process",
+      "images": [
+        {
+          "src": "/images/behind-scenes/sketch-1.png",
+          "alt": "Initial sketches"
+        },
+        {
+          "src": "/images/behind-scenes/sketch-2.png",
+          "alt": "Character development"
+        },
+        {
+          "src": "/images/behind-scenes/sketch-3.png",
+          "alt": "Sock tree design"
+        },
+        {
+          "src": "/images/behind-scenes/sketch-4.png",
+          "alt": "Final illustrations"
+        }
+      ]
+    }
+  }
+} 

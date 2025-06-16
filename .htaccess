@@ -1,0 +1,30 @@
+DirectoryIndex index.html
+
+# Enforce strict HTTPS
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Set the base directory
+RewriteBase /
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Don't rewrite files or directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Don't rewrite Next.js static files
+RewriteCond %{REQUEST_URI} !^/_next/
+RewriteCond %{REQUEST_URI} !^/images/
+RewriteCond %{REQUEST_URI} !^/favicon.ico
+
+# Only rewrite if request is not root
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^(.*)$ /$1.html [L]
+
+# If the requested file doesn't exist, serve index.html
+ErrorDocument 404 /index.html
