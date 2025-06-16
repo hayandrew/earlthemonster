@@ -23,6 +23,11 @@ jobs:
     - name: Build
       run: npm run build
     
+    - name: Copy config directory
+      run: |
+        mkdir -p out/config
+        cp config/recaptcha.php out/config/
+    
     - name: Deploy to GoDaddy
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
