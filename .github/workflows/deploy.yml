@@ -115,9 +115,9 @@ jobs:
         open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -p ${{ secrets.FTP_PORT }} ${{ secrets.FTP_SERVER }}
         
         # Upload files with retry logic
-        mirror --verbose --reverse --delete --parallel=2 --exclude-glob .git* --exclude-glob node_modules --exclude-glob .DS_Store ./out/ public_html/earlthemonster.com/
+        mirror --verbose --reverse --delete --parallel=2 --exclude-glob .git* --exclude-glob node_modules --exclude-glob .DS_Store --include-glob .htaccess ./out/ public_html/earlthemonster.com/
         
-        # List files after upload
+        # List files after upload (including hidden files)
         ls -la public_html/earlthemonster.com/
         
         bye
