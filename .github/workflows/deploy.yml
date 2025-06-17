@@ -107,8 +107,7 @@ jobs:
         mput *.ico
         mput *.svg
         
-        # Upload _next directory
-        mkdir _next
+        # Upload _next directory recursively
         cd _next
         lcd _next
         mput *
@@ -118,21 +117,18 @@ jobs:
         cd ../..
         
         # Upload images directory
-        mkdir images
         cd images
         lcd images
         mput *
         cd ..
         
         # Upload config directory
-        mkdir config
         cd config
         lcd config
         mput *
         cd ..
         
         # Upload vendor directory
-        mkdir vendor
         cd vendor
         lcd vendor
         mput *
@@ -140,7 +136,7 @@ jobs:
         
         # Upload .htaccess separately
         lcd ..
-        put out/.htaccess .htaccess
+        put .htaccess .htaccess
         
         # List files
         ls -la
