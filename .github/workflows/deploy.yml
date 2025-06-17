@@ -107,22 +107,32 @@ jobs:
         mput *.ico
         mput *.svg
         
-        # Upload directories recursively
+        # Upload _next directory
+        mkdir _next
         cd _next
         lcd _next
         mput *
-        cd ..
+        cd static
+        lcd static
+        mput *
+        cd ../..
         
+        # Upload images directory
+        mkdir images
         cd images
         lcd images
         mput *
         cd ..
         
+        # Upload config directory
+        mkdir config
         cd config
         lcd config
         mput *
         cd ..
         
+        # Upload vendor directory
+        mkdir vendor
         cd vendor
         lcd vendor
         mput *
