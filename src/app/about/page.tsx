@@ -15,10 +15,10 @@ export default async function About() {
       {/* Book Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-white mb-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             {content.bookSection.title}
           </h1>
-          <p className="text-xl text-white max-w-3xl mx-auto">
+          <p className="text-base sm:text-xl text-white max-w-3xl mx-auto leading-relaxed">
             {content.bookSection.description}
           </p>
         </div>
@@ -31,10 +31,10 @@ export default async function About() {
       {/* Behind the Scenes Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             {content.behindTheScenes.title}
           </h2>
-          <p className="text-xl text-white max-w-3xl mx-auto">
+          <p className="text-base sm:text-xl text-white max-w-3xl mx-auto leading-relaxed">
             {content.behindTheScenes.description}
           </p>
         </div>

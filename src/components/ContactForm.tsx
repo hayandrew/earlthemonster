@@ -200,8 +200,8 @@ export default function ContactForm({ formConfig }: ContactFormProps) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-[#1f7285] rounded-lg md:border-l" style={{borderLeft: '1px solid rgb(41, 149, 174)', borderLeftWidth: undefined}}>
-      <h2 className="text-2xl font-semibold text-white mb-6">
+    <div className="max-w-2xl mx-auto p-6 bg-[#1f7285] rounded-lg md:border-l" style={{borderLeft: '1px solid rgb(41, 149, 174)', borderLeftWidth: '0px'}}>
+      <h2 className="text-xl sm:text-2xl font-semibold text-white mb-6">
         {formConfig?.title || 'Send Us a Message'}
       </h2>
       {error && (

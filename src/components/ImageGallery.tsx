@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 interface ImageGalleryProps {
@@ -16,6 +16,18 @@ const ImageGallery = ({ title, images }: ImageGalleryProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const nextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -62,10 +74,8 @@ const ImageGallery = ({ title, images }: ImageGalleryProps) => {
             alt={currentImage.alt}
             width={800}
             height={400}
-            className={`w-full h-full object-cover transition-opacity duration-300 cursor-pointer ${
-              isLoading ? 'opacity-0' : 'opacity-100'
-            }`}
-            onClick={() => setIsPopupOpen(true)}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'} ${!isMobile ? 'cursor-pointer' : ''}`}
+            onClick={() => !isMobile && setIsPopupOpen(true)}
             onLoad={() => {
               console.log('Image loaded successfully:', currentImage.src);
               setIsLoading(false);
@@ -137,26 +147,82 @@ const ImageGallery = ({ title, images }: ImageGalleryProps) => {
           />
         ))}
       </div>
+      <p className="hidden md:block text-center text-sm text-[#bcbcbc] mt-2">(Click image for fullscreen view)</p>
       {isPopupOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80" onClick={() => setIsPopupOpen(false)}>
-          <div className="relative max-w-3xl w-full p-4" onClick={e => e.stopPropagation()}>
-            <button
-              className="absolute top-4 right-4 bg-white text-black rounded-full p-2 shadow hover:bg-gray-200"
-              onClick={() => setIsPopupOpen(false)}
-              aria-label="Close"
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80" 
+          onClick={() => setIsPopupOpen(false)}
+        >
+          <div 
+            className="relative w-full h-full flex items-center justify-center p-4" 
+            onClick={e => e.stopPropagation()}
+          >
+            <div 
+              className="relative max-w-[90vw] max-h-[90vh]"
+              onClick={e => e.stopPropagation()}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <Image
-              src={currentImage.src}
-              alt={currentImage.alt}
-              width={1200}
-              height={600}
-              className="w-full h-auto object-contain rounded-lg"
-              unoptimized
-            />
+              <button
+                className="absolute -top-12 right-0 bg-white text-black rounded-full p-2 shadow hover:bg-gray-200 z-10"
+                onClick={() => setIsPopupOpen(false)}
+                aria-label="Close"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <Image
+                src={currentImage.src}
+                alt={currentImage.alt}
+                width={1200}
+                height={600}
+                className="w-full h-full object-contain"
+                unoptimized
+              />
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevImage();
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 z-10"
+                aria-label="Previous image"
+              >
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextImage();
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 z-10"
+                aria-label="Next image"
+              >
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       )}
