@@ -150,8 +150,8 @@ jobs:
           ftp -n -v -i -p < ftp_commands.txt &
           ftp_pid=$!
           
-          # Wait for 10 seconds
-          sleep 10
+          # Wait for 20 seconds
+          sleep 20
           
           # Check if FTP process is still running
           if kill -0 $ftp_pid 2>/dev/null; then
@@ -160,8 +160,8 @@ jobs:
             echo "Connection timed out, retrying..."
             retry_count=$((retry_count + 1))
             if [ $retry_count -lt $max_retries ]; then
-              echo "Waiting 5 seconds before next attempt..."
-              sleep 5
+              echo "Waiting 10 seconds before next attempt..."
+              sleep 10
             fi
           else
             # Check if FTP completed successfully
@@ -172,8 +172,8 @@ jobs:
             else
               retry_count=$((retry_count + 1))
               if [ $retry_count -lt $max_retries ]; then
-                echo "Connection failed, waiting 5 seconds before retry..."
-                sleep 5
+                echo "Connection failed, waiting 10 seconds before retry..."
+                sleep 10
               fi
             fi
           fi
