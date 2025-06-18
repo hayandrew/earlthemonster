@@ -27,7 +27,7 @@ export default function Header() {
                   <img 
                     src="/images/title.png" 
                     alt="Earl's Elastic, Stretchy Socks Logo" 
-                    className="w-[230px] md:w-[460px] h-auto object-contain pt-[5px] pb-[5px] md:pt-0 md:pb-0"
+                    className="w-[230px] md:w-[460px] h-auto object-contain pt-[5px] pb-[5px] md:pt-0 md:pb-0 -rotate-[1.25deg]"
                   />
                 </picture>
               </Link>

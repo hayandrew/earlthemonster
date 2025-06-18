@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-lg font-semibold mb-4">Earl's Elastic, Stretchy Socks</h3>
+            <img src="/images/title.png" alt="Earl's Elastic, Stretchy Socks" className="w-[300px] md:w-[320px] md:pr-[3%] h-auto mb-4 -rotate-[1.25deg]" />
             <p className="text-gray-300">
             A bedtime story about a furry monster and his magical socks.
             </p>
