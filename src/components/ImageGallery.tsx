@@ -147,7 +147,7 @@ const ImageGallery = ({ title, images }: ImageGalleryProps) => {
           />
         ))}
       </div>
-      <p className="hidden md:block text-center text-sm text-[#bcbcbc] mt-2">(Click image for fullscreen view)</p>
+      <p className="hidden md:block text-center text-sm text-white mt-2">Click image for fullscreen view</p>
       {isPopupOpen && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80" 

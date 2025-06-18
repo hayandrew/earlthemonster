@@ -15,10 +15,10 @@ export default async function About() {
       {/* Book Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="text-center mb-12">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 font-serif">
             {content.bookSection.title}
           </h1>
-          <p className="text-base sm:text-xl text-white max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-white max-w-3xl mx-auto leading-relaxed font-sans">
             {content.bookSection.description}
           </p>
         </div>
@@ -45,4 +45,4 @@ export default async function About() {
       </section>
     </div>
   );
-} 
+}

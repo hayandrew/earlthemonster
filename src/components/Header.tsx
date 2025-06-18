@@ -17,15 +17,18 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 bg-[#1f7285]/75 backdrop-blur">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center md:h-20 h-auto min-h-[56px]">
           {/* Logo and site title */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <img 
-                src="/images/title.png" 
-                alt="Earl's Elastic, Stretchy Socks Logo" 
-                className="w-[460px] h-auto object-contain"
-              />
+              <picture>
+                <source srcSet="/images/title-stacked.png" media="(max-width: 767px)" />
+                <img 
+                  src="/images/title.png" 
+                  alt="Earl's Elastic, Stretchy Socks Logo" 
+                  className="w-[230px] md:w-[460px] h-auto object-contain pt-[5px] pb-[5px] md:pt-0 md:pb-0"
+                />
+              </picture>
             </Link>
           </div>
           {/* Desktop Navigation */}

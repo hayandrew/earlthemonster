@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Libre_Baskerville, Inter } from "next/font/google";
+/* import { Libre_Baskerville, Inter } from "next/font/google"; */
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const libreBaskerville = Libre_Baskerville({
+/* const libreBaskerville = Libre_Baskerville({
   weight: ['400', '700'],
   subsets: ["latin"],
   display: 'swap',
@@ -15,7 +15,8 @@ const inter = Inter({
   subsets: ["latin"],
   display: 'swap',
   variable: '--font-inter',
-});
+}); */
+
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://earlselasticstretchysocks.com'),
@@ -29,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${libreBaskerville.variable} ${inter.variable}`}>
-      <body className={`${inter.className} bg-[#1f7285] min-h-screen`}>
+    <html lang="en">
+      <body className={`bg-[#1f7285] min-h-screen`}>
         <Header />
         <main className="pt-16">
           {children}

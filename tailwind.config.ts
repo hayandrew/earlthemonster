@@ -7,12 +7,18 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontFamily: {
-      'libre-baskerville': ['var(--font-libre-baskerville)', 'serif'],
-      'inter': ['var(--font-inter)', 'sans-serif'],
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        serif: ['Libre Baskerville', 'serif'],
+      },
     },
   },
   plugins: [],
 };
 
-export default config; 
+export default config;
