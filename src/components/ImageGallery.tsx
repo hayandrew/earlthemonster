@@ -17,6 +17,8 @@ const ImageGallery = ({ title, images }: ImageGalleryProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchEndX, setTouchEndX] = useState<number | null>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -41,6 +43,27 @@ const ImageGallery = ({ title, images }: ImageGalleryProps) => {
     setError(null);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX !== null && touchEndX !== null) {
+      const distance = touchStartX - touchEndX;
+      if (distance > 50) {
+        nextImage();
+      } else if (distance < -50) {
+        prevImage();
+      }
+    }
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
+
   if (!images || images.length === 0) {
     return (
       <div className="relative">
@@ -57,7 +80,11 @@ const ImageGallery = ({ title, images }: ImageGalleryProps) => {
   return (
     <div className="relative">
       <h3 className="text-2xl font-semibold text-white mb-6">{title}</h3>
-      <div className="relative w-full h-[400px] overflow-hidden rounded-lg bg-gray-100">
+      <div className="relative w-full h-[400px] overflow-hidden rounded-lg bg-gray-100"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
@@ -156,6 +183,9 @@ const ImageGallery = ({ title, images }: ImageGalleryProps) => {
           <div 
             className="relative w-full h-full flex items-center justify-center p-4" 
             onClick={e => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             <div 
               className="relative max-w-[90vw] max-h-[90vh]"
