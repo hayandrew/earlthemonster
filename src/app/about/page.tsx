@@ -11,7 +11,7 @@ export default async function About() {
   const content = await getContent('about');
 
   return (
-    <div className="pb-20">
+    <div className="pt-16 pb-20">
       {/* Book Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="text-center mb-12">

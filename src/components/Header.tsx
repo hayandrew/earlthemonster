@@ -16,7 +16,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-[#1f7285]/75 backdrop-blur">
+      <header className="sticky top-0 z-40 bg-[#027f92]/75 backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center md:h-20 h-auto min-h-[56px]">
             {/* Logo and site title */}
@@ -48,7 +48,7 @@ export default function Header() {
               </Link>
               <Link
                 href="/order"
-                className="inline-flex items-center bg-[#ffe03b] text-black font-bold rounded-full hover:bg-yellow-300 transition-colors ml-4 whitespace-nowrap"
+                className="inline-flex items-center bg-[#f9d606] text-black font-bold rounded-full hover:bg-yellow-300 transition-colors ml-4 whitespace-nowrap"
                 style={{boxShadow: '0 2px 8px rgba(0,0,0,0.04)', padding: '6px 18px'}}>
                 Order Now
               </Link>
@@ -83,8 +83,8 @@ export default function Header() {
             className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur"
             onClick={toggleMobileMenu}
           ></div>
-          <div className="fixed inset-y-0 right-0 w-full sm:max-w-sm bg-[#1f7285] shadow-xl transform transition-transform duration-300 ease-in-out h-screen">
-            <div className="flex flex-col h-screen bg-[#1f7285]">
+          <div className="fixed inset-y-0 right-0 w-full sm:max-w-sm bg-[#027f92] shadow-xl transform transition-transform duration-300 ease-in-out h-screen">
+            <div className="flex flex-col h-screen bg-[#027f92]">
               <div className="flex justify-end p-6">
                 <button
                   onClick={toggleMobileMenu}
@@ -121,7 +121,7 @@ export default function Header() {
                 <Link
                   href="/order"
                   onClick={toggleMobileMenu}
-                  className="block bg-[#ffe03b] text-black font-bold rounded-full hover:bg-yellow-300 text-center mt-8"
+                  className="block bg-[#f9d606] text-black font-bold rounded-full hover:bg-yellow-300 text-center mt-8"
                   style={{boxShadow: '0 2px 8px rgba(0,0,0,0.04)', padding: '12px 24px'}}>
                   Order Now
                 </Link>

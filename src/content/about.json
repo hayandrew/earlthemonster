@@ -1,51 +1,37 @@
 {
   "bookSection": {
     "title": "About the Book",
-    "description": "With playful rhymes and hand-drawn illustrations, this bedtime story is for anyone who loves socks or likes spending time with a big yellow monster. Author and illustrator Andy Hay imagines a whimsical world filled with magic, color, and delight.",
+    "description": "With playful rhymes and 36 pages of hand-drawn illustrations (by human hand), this bedtime story is for anyone who loves socks or likes spending time with a big yellow monster. Illustrator and author Andy Hay imagines a whimsical world filled with magic, color, and delight.",
     "gallery": {
       "title": "Book Preview",
       "images": [
-        {
-          "src": "/images/book/cover.png",
-          "alt": "Book Cover"
-        },
-        {
-          "src": "/images/book/preview-1.png",
-          "alt": "Earl in the forest"
-        },
-        {
-          "src": "/images/book/preview-2.png",
-          "alt": "Sock trees"
-        },
-        {
-          "src": "/images/book/preview-3.png",
-          "alt": "Sardine tins"
-        }
+        
+        { "src": "/images/book/1-front-cover.jpg", "alt": "Front Cover" },
+        { "src": "/images/book/2-inside-cover.jpg", "alt": "Inside Cover" },
+        { "src": "/images/book/3-in-the-machine.jpg", "alt": "Sparkle Fizz in the Machine" },
+        { "src": "/images/book/4-giddy-lofus.jpg", "alt": "His favorite Giddy Lofus rose" },
+        { "src": "/images/book/5-tin-goes-pop.jpg", "alt": "He grins with glee the tin goes pop!" },
+        { "src": "/images/book/6-stacks-and-stacks.jpg", "alt": "Stacks and Stacks" },
+        { "src": "/images/book/7-back-cover.jpg", "alt": "Back Cover" }
+        
       ]
     }
   },
   "behindTheScenes": {
     "title": "Behind the Scenes",
-    "description": "From the magical sock trees to the basement full of sardine tins, every detail in Earl's world was carefully crafted to create a delightful reading experience. The story combines whimsical elements with practical sock care tips, making it both entertaining and educational.",
+    "description": "From the magical sock trees to a basement full of sardine tins, every detail in Earl's world was hand-drawn with love. Andy Hay first drew Earl in Greenwich Village in 2003. Twenty-two years later...Earl is ready for the whole world!",
     "gallery": {
       "title": "Creation Process",
       "images": [
-        {
-          "src": "/images/behind-scenes/sketch-1.png",
-          "alt": "Initial sketches"
-        },
-        {
-          "src": "/images/behind-scenes/sketch-2.png",
-          "alt": "Character development"
-        },
-        {
-          "src": "/images/behind-scenes/sketch-3.png",
-          "alt": "Sock tree design"
-        },
-        {
-          "src": "/images/behind-scenes/sketch-4.png",
-          "alt": "Final illustrations"
-        }
+        { "src": "images/creation-process/in_the_machine.jpg", "alt": "In the Machine" },
+        { "src": "images/creation-process/inside_covers.jpg", "alt": "Inside Covers" },
+        { "src": "images/creation-process/basement_where.jpg", "alt": "In the Basement" },
+        { "src": "images/creation-process/underneath_his_head.jpg", "alt": "Underneath his head" },
+        { "src": "images/creation-process/walk_all_day.jpg", "alt": "Walk All Day" },
+        { "src": "images/creation-process/title_page.jpg", "alt": "Title Page" },
+        { "src": "images/creation-process/giddie_lofus.jpg", "alt": "Giddie Lofus" },
+        { "src": "images/creation-process/end_just_right.jpg", "alt": "End Just Right" },
+        { "src": "images/creation-process/tin_goes_pop.jpg", "alt": "Tin Goes Pop" }
       ]
     }
   }

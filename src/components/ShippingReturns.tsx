@@ -7,7 +7,7 @@ const ShippingReturns = () => {
 
   return (
     <>
-    <div className="bg-[#1f7285] rounded-lg p-6" >
+    <div className="bg-[#027f92] rounded-lg p-6" >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full text-left text-white text-lg font-semibold py-4"

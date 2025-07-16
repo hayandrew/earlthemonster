@@ -1,24 +1,24 @@
 {
   "hero": {
-    "title": "A Magical Bedtime Adventure!",
+    "title": "A Sock-tacular Bedtime Adventure",
     "description": "Meet Earl: the happiest monster in the entire universe. Earl is so happy because he wears the most snuggly, stretchy, fluffy, fuzzy, cuddly, cozy socks ever!"
   },
   "features": [
     {
-      "title": "Fabulous Sock Trees",
+      "title": "Magical Sock Trees",
       "description": "Visit Earl in the faraway forest where he plucks fresh socks off the sock trees"
     },
     {
-      "title": "Sparkle Fizz Secrets",
-      "description": "Learn how Earl cleans his socks with Sparkle Fizz and keeps them smelling like Giddie Lofus roses"
+      "title": "Sparkle Fizz",
+      "description": "Learn how Earl machine-hand-washes his socks to keep them smelling like roses"
     },
     {
-      "title": "Stocking Storage",
-      "description": "Discover where Earl keeps his stacks and stacks of stocking twins in magical sardine tins"
+      "title": "Sock Storage",
+      "description": "Go downstairs and see tall stacks of sardine tins where Earl stores his socks."
     }
   ],
   "cta": {
-    "text": "Step into Earl's world—where every day ends just right!",
+    "text": "Step into Earl's world where every day ends just right!",
     "buttonText": "Order Your Copy"
   }
 } 

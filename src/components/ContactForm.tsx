@@ -200,7 +200,7 @@ export default function ContactForm({ formConfig }: ContactFormProps) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-[#1f7285] rounded-lg md:border-l" style={{borderLeft: '1px solid rgb(41, 149, 174)', borderLeftWidth: '0px'}}>
+    <div className="mx-auto p-6 bg-[#027f92] rounded-lg md:border-l" style={{borderLeft: '1px solid #2995ae', borderLeftWidth: '0px'}}>
       <h2 className="text-xl sm:text-2xl font-semibold text-white mb-6">
         {formConfig?.title || 'Send Us a Message'}
       </h2>
@@ -229,7 +229,7 @@ export default function ContactForm({ formConfig }: ContactFormProps) {
                 onChange={handleChange}
                 required
                 disabled={loading}
-                className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400 ${
+                className={`max-w-sm w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400 ${
                   loading ? 'opacity-60 cursor-not-allowed' : ''
                 }`}
                 placeholder={formConfig?.fields?.name?.placeholder || 'Your name'}
@@ -247,7 +247,7 @@ export default function ContactForm({ formConfig }: ContactFormProps) {
                 onChange={handleChange}
                 required
                 disabled={loading}
-                className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400 ${
+                className={`max-w-sm w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400 ${
                   loading ? 'opacity-60 cursor-not-allowed' : ''
                 }`}
                 placeholder={formConfig?.fields?.email?.placeholder || 'your.email@example.com'}
@@ -265,7 +265,7 @@ export default function ContactForm({ formConfig }: ContactFormProps) {
                 required
                 disabled={loading}
                 rows={4}
-                className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400 ${
+                className={`min-h-[200px] max-w-lg w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[#333333] placeholder-gray-400 ${
                   loading ? 'opacity-60 cursor-not-allowed' : ''
                 }`}
                 placeholder={formConfig?.fields?.message?.placeholder || 'Your message'}
@@ -277,7 +277,7 @@ export default function ContactForm({ formConfig }: ContactFormProps) {
         <button
           type="submit"
           disabled={loading || success}
-          className={`inline-flex items-center justify-center bg-[#ffe03b] text-black font-bold rounded-full transition-colors shadow-sm mx-auto ${
+          className={`inline-flex items-center justify-center bg-[#f9d606] text-black font-bold rounded-full transition-colors shadow-sm mx-auto ${
             loading || success
               ? 'opacity-60 cursor-not-allowed'
               : 'hover:bg-yellow-300'

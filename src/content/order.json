@@ -1,19 +1,6 @@
 {
   "title": "Order Your Copy",
-  "description": "Get your hands on a copy of Earl's Elastic, Stretchy Socks and join Earl on his magical sock adventures. Perfect for bedtime reading, this whimsical story will delight readers of all ages.",
-  "form": {
-    "name": "Name",
-    "email": "Email",
-    "address": "Shipping Address",
-    "quantity": "Number of Copies",
-    "submit": "Place Order"
-  },
-  "details": {
-    "price": "$19.99",
-    "shipping": "Free shipping within the US",
-    "format": "Hardcover, 32 pages",
-    "ageRange": "Ages 3-8"
-  },
+  "description": "Get a copy of Earl's Elastic, Stretchy Socks and join Earl on his sock adventure. Perfect for bedtime reading, this whimsical story will delight readers of all ages.",
   "bookDetails": {
     "title": "Earl's Elastic, Stretchy Socks",
     "author": "Andy Hay",
@@ -22,33 +9,5 @@
     "pages": "36",
     "isbn": "979-8-218-61256-6",
     "price": "$22.99"
-  },
-  "shipping": {
-    "title": "Shipping Information",
-    "options": [
-      {
-        "name": "Standard Shipping",
-        "price": "4.99",
-        "deliveryTime": "5-7 business days"
-      },
-      {
-        "name": "Express Shipping",
-        "price": "9.99",
-        "deliveryTime": "2-3 business days"
-      }
-    ]
-  },
-  "payment": {
-    "title": "Payment Information",
-    "methods": [
-      {
-        "name": "Credit Card",
-        "icon": "credit-card"
-      },
-      {
-        "name": "PayPal",
-        "icon": "paypal"
-      }
-    ]
   }
 } 

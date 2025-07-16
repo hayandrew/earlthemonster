@@ -66,4 +66,18 @@ body {
   }
 }
 
+.hero-bg {
+  background: url('/images/home-splash.jpg') center top / auto 250px no-repeat;
+}
+@media (min-width: 640px) {
+  .hero-bg {
+    background: url('/images/home-splash.jpg') center top / auto 390px no-repeat;
+  }
+}
+@media (min-width: 768px) {
+  .hero-bg {
+    background: url('/images/home-splash.jpg') center top / auto 500px no-repeat;
+  }
+}
+
 /* Add any other global styles below */

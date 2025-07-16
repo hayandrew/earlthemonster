@@ -12,7 +12,7 @@ export default async function Order() {
   const content = await getContent('order');
 
   return (
-    <div className="pb-20">
+    <div className="pb-20 pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 font-serif">
@@ -25,7 +25,7 @@ export default async function Order() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Book Details */}
-          <div className="md:col-span-1 rounded-lg p-6">
+          <div className="md:col-span-1 rounded-lg p-6 md:min-w-[325px]">
             <h2 className="text-xl sm:text-2xl font-semibold text-white mb-6 font-serif">Book Details</h2>
             <div className="space-y-2">
               <p className="text-sm sm:text-base text-white leading-tight font-sans">
@@ -43,21 +43,26 @@ export default async function Order() {
               <p className="text-sm sm:text-base text-white leading-tight font-sans">
                 <strong>ISBN:</strong> {content.bookDetails.isbn}
               </p>
-              <p className="text-xl sm:text-2xl font-bold text-white mt-4 font-serif">
-                <strong>Price: </strong>
-                <span dangerouslySetInnerHTML={{ __html: content.bookDetails.price }} />
-              </p>
-              <p className="text-sm text-[#bcbcbc] mt-2 font-sans">
-                Free shipping within the US.
-              </p>
+              <div className="w-full flex justify-center my-4">
+                <div className="w-full h-[240px] bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 text-lg font-semibold">
+                  Image Placeholder
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-xl sm:text-2xl font-bold text-white mt-4 font-serif">
+                  <strong>Price: </strong>
+                  <span dangerouslySetInnerHTML={{ __html: content.bookDetails.price }} />
+                </p>
+                <p className="text-sm text-[#bcbcbc] mt-2 font-sans">
+                  Free shipping within the US
+                </p>
+              </div>
             </div>
           </div>
 
           {/* Order Form */}
-          <div className="md:col-span-2">
-            {/* Shipping & Returns Section */}
+          <div className={`md:col-span-2`}>
             <OrderForm />
-            <ShippingReturns />
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ export default function ContactContent({ content }: ContactContentProps) {
   const [activeTab, setActiveTab] = useState('info');
 
   return (
-    <div className="pb-20">
+    <div className="pt-16 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -27,7 +27,7 @@ export default function ContactContent({ content }: ContactContentProps) {
           <div className="flex border-b border-[#2995ae]">
             <button
               onClick={() => setActiveTab('info')}
-              className={`flex-1 py-3 text-center text-white font-medium ${
+              className={`flex-1 py-3 text-center text-white font-bold ${
                 activeTab === 'info' ? 'border-b-2 border-[#ffe03b]' : ''
               }`}
             >
@@ -35,7 +35,7 @@ export default function ContactContent({ content }: ContactContentProps) {
             </button>
             <button
               onClick={() => setActiveTab('form')}
-              className={`flex-1 py-3 text-center text-white font-medium ${
+              className={`flex-1 py-3 text-center text-white font-bold ${
                 activeTab === 'form' ? 'border-b-2 border-[#ffe03b]' : ''
               }`}
             >
