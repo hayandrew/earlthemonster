@@ -43,10 +43,12 @@ export default async function Order() {
               <p className="text-sm sm:text-base text-white leading-tight font-sans">
                 <strong>ISBN:</strong> {content.bookDetails.isbn}
               </p>
-              <div className="w-full flex justify-center my-4">
-                <div className="w-full h-[240px] bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 text-lg font-semibold">
-                  Image Placeholder
-                </div>
+              <div className="w-full flex justify-center my-4 rounded-lg bg-white">
+                <img
+                  src="/images/order-image.jpg"
+                  alt="Earl's Elastic, Stretchy Socks Book"
+                  className="h-[240px] object-cover"
+                />
               </div>
               <div className="text-right">
                 <p className="text-xl sm:text-2xl font-bold text-white mt-4 font-serif">

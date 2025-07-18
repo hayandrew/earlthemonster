@@ -105,6 +105,13 @@ export default function Header() {
               </div>
               <nav className="flex-1 px-6 pb-6 space-y-6">
                 <Link
+                  href="/"
+                  onClick={toggleMobileMenu}
+                  className={`block text-white text-lg hover:underline ${isActive('/') ? 'underline' : ''}`}
+                >
+                  Home
+                </Link>
+                <Link
                   href="/about"
                   onClick={toggleMobileMenu}
                   className={`block text-white text-lg hover:underline ${isActive('/about') ? 'underline' : ''}`}
